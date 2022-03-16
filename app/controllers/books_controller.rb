@@ -6,6 +6,17 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  def my_books 
+    @books = current_user.books
+  end
+
+  def reservar 
+    @book = Book.find(params[:id])
+    @book.user_id = current_user.id
+    @book.save
+    redirect_to book_url(@book)
+  end
+
   # GET /books/1 or /books/1.json
   def show
   end
